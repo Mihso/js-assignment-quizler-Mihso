@@ -3,7 +3,6 @@ import { addAnswer } from './answers';
 
 let uniqueQuiz = 1;
 let uniqueQuestion = 1;
-let database = [];
 
 export const chooseRandom = (array1, numItems = 0) => {
 
@@ -62,7 +61,6 @@ export const createQuestions = (item = {}) => {
     for(let f in finalArray){
       let choicer = finalArray[f].choices; 
       answers.push({question: uniqueQuestion, answer: `${choicer[Math.floor(Math.random() * choicer.length)]}`});
-      database.push({id: uniqueQuestion, question: finalArray[f]});
       uniqueQuestion +=1;
     }
 
