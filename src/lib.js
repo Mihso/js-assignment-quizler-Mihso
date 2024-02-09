@@ -1,4 +1,9 @@
 import fs from 'fs'
+import { addAnswer } from './answers';
+
+let uniqueQuiz = 1;
+let uniqueQuestion = 1;
+let database = [];
 
 export const chooseRandom = (array1, numItems = 0) => {
 
@@ -37,6 +42,7 @@ export const createPrompt = (items = {numQuestions: 1, numChoices: 2}) => {
 
 export const createQuestions = (item = {}) => {
   let finalArray = [];
+  let answers = [];
     for(let i in item){
       if(!i.includes('choice'))
       {
@@ -53,6 +59,15 @@ export const createQuestions = (item = {}) => {
       }
     }
 
+    for(let f in finalArray){
+      let choicer = finalArray[f].choices; 
+      answers.push({question: uniqueQuestion, answer: `${choicer[Math.floor(Math.random() * choicer.length)]}`});
+      database.push({id: uniqueQuestion, question: finalArray[f]});
+      uniqueQuestion +=1;
+    }
+
+    addAnswer( uniqueQuiz, answers)
+    uniqueQuiz += 1
   return finalArray;
 }
 
